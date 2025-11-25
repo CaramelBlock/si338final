@@ -44,7 +44,7 @@ body{
 }
 
 h1{
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
     font-family: "chloe", sans-serif;
 }
@@ -58,7 +58,7 @@ h2{
     color: #5a1599;   
 }
 nav>a{
-    font-size: 12px;
+    font-size: 11px;
     color: #992291;
     text-decoration: none;
     
