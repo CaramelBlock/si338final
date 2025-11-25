@@ -1,8 +1,64 @@
 .items{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    justify-items: center;
+    gap: 10px;
+       
+}
+
+#container{
+    margin: auto auto;
+}
+.item{
+    width: 50px;
+    
+
+}
+/* .canvas{
+    grid-column: 1/6;
+    grid-row: 1/5;
+    left: -10px;
+    width: 200px;
+} */
+.canvas{
+    grid-column: 1/-1;
+    /* grid-row: 1/5; */
+    left: -10px;
+    width: 200px;
 }
 
 body{
-    background-color: lightblue;
+    background-color:#e1f1f5;
+    margin: 0;
+    font-family: Lato, Georgia, Calibri, Arial, Helvetica;
+}
+
+h1{
+    font-size: 15px;
+    margin: 0;
+    font-weight: normal;
+}
+
+
+h2{
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 15px;
+    font-weight: normal; 
+    
+}
+
+
+header{
+    padding-top: 10px;
+    z-index: 1;
+    background-color: white;
+    height: 30px;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    display: flex;
+    justify-content:  center;
+    gap: 10px;
 }
