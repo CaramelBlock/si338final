@@ -21,19 +21,33 @@ p {
 .item{
     width: 50px;
     margin-top: 10px;
-    
+    z-index: 1;
+}
+.sticker{
+    width: 50px;
+    margin-top: 10px;
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    pointer-events: none;
 
 }
+
 /* .canvas{
     grid-column: 1/6;
     grid-row: 1/5;
     left: -10px;
     width: 200px;
 } */
-.canvas{
+#box{
     grid-column: 1/-1;
+}
+.canvas{
+    
     /* grid-row: 1/5; */
     width: 200px;
+    z-index: 0;
 }
 
 body{
