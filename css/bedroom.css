@@ -59,6 +59,12 @@ p {
     /* grid-row: 1/5; */
     width: 200px;
     z-index: 0;
+    /* pointer-events: none; */
+}
+
+.notClickable{
+    pointer-events: none;
+
 }
 
 body{

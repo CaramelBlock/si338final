@@ -32,6 +32,7 @@ for (i = 0; i<items.length; i++){
                 container.removeChild(container.lastChild);
                 removedButton = clickedImages.shift()
                 removedButton.classList.remove("clicked")
+                canvas.classList.add("notClickable")
             }
 
             let posX = event.clientX - this.width/2
@@ -50,7 +51,7 @@ for (i = 0; i<items.length; i++){
             container.appendChild(image)
             zindex++
             container.style.setProperty("display","inherit")
-
+            canvas.classList.remove("notClickable")
             currentBtn = this
 
             
@@ -59,6 +60,7 @@ for (i = 0; i<items.length; i++){
         }
         else {
             container.removeChild(container.lastChild);
+            canvas.classList.add("notClickable")
             clickedImages.pop()
             console.log(clickedImages)
             
@@ -83,6 +85,7 @@ for (i = 0; i<items.length; i++){
                 }
                 clickedImages.pop()
                 document.addEventListener("mousemove", mouseMoveHandler)
+                canvas.classList.add("notClickable")
                 
             }
 
