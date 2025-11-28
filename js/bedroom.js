@@ -1,5 +1,15 @@
 let items = document.querySelectorAll(".item")
-console.log(items)
+let container = document.querySelector(".stickers");
+let canvas = document.querySelector(".canvas");
+let furnitures = document.querySelector(".furnitures")
+let zindex = 3;
+let stickers = []
+let clickedImages = []
+let currentBtn 
+let image = document.createElement("img");
+
+// console.log(items)
+
 for (i = 0; i<items.length; i++){
 //   mouseover for creating border
    items[i].addEventListener("mouseover",function(){
@@ -8,62 +18,107 @@ for (i = 0; i<items.length; i++){
 
 //    mouseout to get rid of border 
    items[i].addEventListener("mouseout",function(){
-        if (this.style.getPropertyValue("background-color") != "rgb(255, 219, 226)"){
-            color = this.style.getPropertyValue("background-color")
-            console.log(color)
-            this.style.setProperty("border","none")
-        }
-        else{
-           this.style.setProperty("border","pink 3px solid") 
-        }
-       
+        this.style.removeProperty("border","#5a1599 3px solid")
    })
 
 //   creates background #d94ca0 when clicked
-   items[i].addEventListener("click",function(event){
-        zindex = 3 
-       
-       if (this.style.getPropertyValue("background-color") != "rgb(255, 219, 226)"){
-            this.style.setProperty("background-color","#ffdbe2")
-            this.style.setProperty("border","pink 3px solid")
-            this.style.setProperty("box-shadow", "0px 0px 5px #53838c")
-            posX = event.clientX - this.width/2
-            posY = event.clientY - this.height/2
-            image = document.createElement("img")
-            src = this.getAttribute("src")
-            alt = this.getAttribute("alt")
+    items[i].addEventListener("click",function(event){
+        this.classList.toggle("clicked")
+        if (this.classList.value == "item clicked"){
+            // this.classList.add("clicked")
+            clickedImages.push(this)
+            if (clickedImages.length > 1){
+                console.log(clickedImages)
+                container.removeChild(container.lastChild);
+                removedButton = clickedImages.shift()
+                removedButton.classList.remove("clicked")
+            }
+
+            let posX = event.clientX - this.width/2
+            let posY = event.clientY - this.height/2
+            let src = this.getAttribute("src")
+            let alt = this.getAttribute("alt")
+
+            
+            stickers.push(image)
             image.setAttribute("alt", alt)
             image.setAttribute("src", src)
             image.classList.add("sticker")
             image.style.setProperty("top",posY+"px")
             image.style.setProperty("left",posX+"px")
-            document.querySelector(".stickers").appendChild(image)
-            zindex ++
+            
+            container.appendChild(image)
+            zindex++
+            container.style.setProperty("display","inherit")
 
-            document.addEventListener("mousemove",function(event){
-                posX = event.clientX - image.width/2
-                posY = event.clientY - image.height/2
-                image.style.setProperty("z-index", 1000)
-                image.style.setProperty("top",posY+"px")
-                image.style.setProperty("left",posX+"px")
-            })
-            document.querySelector(".canvas").addEventListener("click",function(event){
-                furniture = image.cloneNode()
-                image.style.setProperty("display","none")
-                furniture.style.setProperty("z-index", zindex)
-                furniture.style.setProperty("pointer-events","none")
-                document.querySelector(".furnitures").appendChild(furniture)
-                
-            })
+            currentBtn = this
+
+            
+
+            
         }
-        else{
-            this.style.setProperty("background-color","inherit")
-            this.style.setProperty("border","#5a1599 3px solid")
-            this.style.setProperty("box-shadow", "inherit")
+        else {
+            container.removeChild(container.lastChild);
+            clickedImages.pop()
+            console.log(clickedImages)
+            
         }
    })
+   let mouseMoveHandler = function(event) {
+                posX = event.clientX - image.width/2
+                posY = event.clientY - image.height/2
+                image.style.setProperty("z-index", zindex)
+                image.style.setProperty("top",posY+"px")
+                image.style.setProperty("left",posX+"px")
+            }
+            document.addEventListener("mousemove", mouseMoveHandler)
+
+    let canvasClickHandler = function(event){
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                currentBtn.classList.remove("clicked")
+                let furniture = image.cloneNode()
+                furnitures.appendChild(furniture)
+                if (container.lastChild){
+                    container.removeChild(container.lastChild)
+                }
+                clickedImages.pop()
+                document.addEventListener("mousemove", mouseMoveHandler)
+                
+            }
+
+            canvas.addEventListener("click", canvasClickHandler)
 
 //  removes background when clicked again or alother is clicked 
 
 }
+// let posButtonUnclick = true
+// document.querySelector("#posButton").addEventListener("click", function(){
+//     if (posButtonUnclick){
+//         posButtonUnclick = false
+//         for (i = 0; i<stickers.length; i++){
+//             stickers[i].style.setProperty("pointer-events", "auto")
+//             stickers[i].addEventListener("click",function(){
+//                 sticker = this
+//                 let mouseMoveHandler = function(event) {
+//                         posX = event.clientX - image.width/2
+//                         posY = event.clientY - image.height/2
+//                         sticker.style.setProperty("z-index", zindex)
+//                         sticker.style.setProperty("top",posY+"px")
+//                         sticker.style.setProperty("left",posX+"px")
+//                     }
+//                 document.addEventListener("mousemove", mouseMoveHandler)
+//                 let canvasClickHandler = function(){
+//                         document.removeEventListener('mousemove', mouseMoveHandler);
+//                     }
 
+//                 canvas.addEventListener("click", canvasClickHandler)
+//             })
+        
+//         }
+//     }
+//     else{
+//         for (i = 0; i<stickers.length; i++){
+//             stickers[i].style.setProperty("pointer-events", "none") 
+//         }
+//     }
+// })

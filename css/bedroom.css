@@ -22,6 +22,7 @@ p {
     width: 50px;
     margin-top: 10px;
     z-index: 1;
+    border: #e1f1f5 3px solid;
 }
 .sticker{
     width: 50px;
@@ -34,6 +35,16 @@ p {
 
 }
 
+.unclicked{
+    background-color:inherit;
+    border: #5a1599 3px solid;
+    box-shadow: inherit;
+}
+.clicked{
+    background-color: #ffdbe2;
+    border: pink 3px solid;
+    box-shadow: 0px 0px 5px #53838c;
+}
 /* .canvas{
     grid-column: 1/6;
     grid-row: 1/5;
