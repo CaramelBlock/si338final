@@ -11,7 +11,7 @@ main{
 }
 
 h1{
-    font-size: 16px;
+    font-size: 15px;
     margin: 0;
     font-family: "chloe", sans-serif;
     color: #410b70;
@@ -35,7 +35,7 @@ img{
     }
      */
 nav>a{
-    font-size: 11px;
+    font-size: 10px;
     color: #992291;
     text-decoration: none;
     font-weight: 600;
