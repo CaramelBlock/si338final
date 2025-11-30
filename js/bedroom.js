@@ -40,7 +40,7 @@ for (i = 0; i<items.length; i++){
             let posX = event.clientX - this.width/2
             let posY = event.clientY - this.height/2
             let src = this.getAttribute("src")
-            let alt = this.getAttribute("alt")
+            let alt = ""
 
             if (this.classList.value.includes("flipped")){
                 image.classList.add("flipped")
@@ -137,10 +137,13 @@ clearButton.addEventListener("mousedown", function(){
     })
 
 clearButton.addEventListener("mouseup", function(){
-    clearButton.classList.remove("clicked")       
-    while (furnitures.children.length > 0){
-        console.log(furnitures)
-        furnitures.removeChild(furnitures.lastChild)
+    let conformation = confirm("Are you sure you want to remove all of your furniture?")
+    clearButton.classList.remove("clicked") 
+    if (conformation){      
+        while (furnitures.children.length > 0){
+            console.log(furnitures)
+            furnitures.removeChild(furnitures.lastChild)
+        }
     }     
 })
 

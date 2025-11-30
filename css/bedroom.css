@@ -7,14 +7,14 @@
        
 }
 
-#container{
+/* #container{
     margin: auto auto;
-}
+} */
 .item{
     width: 35px;
     margin-top: 10px;
     z-index: 1;
-    border: #e1f1f5 5px solid;
+    border: #e1f1f5 3px solid;
 }
 .sticker{
     width: 100px;
@@ -34,6 +34,7 @@
     border: #5a1599 2px solid;
     font-family: "omnes-pro", Arial, Helvetica;
     font-weight: 600;
+    font-size: 10px;
     color: #410b70;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #53838c;
@@ -42,12 +43,12 @@
 
 .unclicked{
     background-color:inherit;
-    border: #5a1599 5px solid;
+    border: #5a1599 2px solid;
     box-shadow: inherit;
 }
 .clicked{
     background-color: #ffdbe2;
-    border: pink 5px solid;
+    border: pink 2px solid;
     box-shadow: 0px 0px 5px #53838c;
 }
 /* .canvas{
@@ -89,15 +90,14 @@ h1{
 #buttons{
     display: flex;
     justify-content:  center;
-    gap: 20px;
+    gap: 5px;
     margin-bottom: 5px;
     margin-top: 10px;
-
 }
 
 
 h2{
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
     padding: 0px;
     line-height: 0px;
@@ -166,6 +166,12 @@ header{
     .sticker{
     width: 125px;
     }
+    .unclicked{
+    border: #5a1599 3px solid;
+    }
+    .clicked{
+        border: pink 3px solid;
+    }
 
 }
 
@@ -198,6 +204,12 @@ header{
         left: -10px;
         width: 500px;
 
+    }
+    #buttons{
+        gap: 10px;
+    }
+    .button{
+        font-size: 12px;
     }
     .item{
         width: 100px;
