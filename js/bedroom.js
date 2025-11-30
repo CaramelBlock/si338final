@@ -7,6 +7,7 @@ let stickers = []
 let clickedImages = []
 let currentBtn 
 let image = document.createElement("img");
+let text = document.querySelector("h2");
 
 // console.log(items)
 
@@ -24,7 +25,8 @@ for (i = 0; i<items.length; i++){
 //   creates background #d94ca0 when clicked
     items[i].addEventListener("click",function(event){
         this.classList.toggle("clicked")
-        if (this.classList.value == "item clicked"){
+        if (this.classList.value.includes("clicked")){
+            text.innerHTML = "Now click the location you want the object placed!"
             // this.classList.add("clicked")
             clickedImages.push(this)
             if (clickedImages.length > 1){
@@ -40,6 +42,12 @@ for (i = 0; i<items.length; i++){
             let src = this.getAttribute("src")
             let alt = this.getAttribute("alt")
 
+            if (this.classList.value.includes("flipped")){
+                image.classList.add("flipped")
+            }
+            else{
+                image.classList.remove("flipped")
+            }
             
             image.setAttribute("alt", alt)
             image.setAttribute("src", src)
@@ -58,6 +66,7 @@ for (i = 0; i<items.length; i++){
             
         }
         else {
+            text.innerHTML = "To start decorating, click an item you want to add!"
             container.removeChild(container.lastChild);
             canvas.classList.add("notClickable")
             clickedImages.pop()
@@ -65,7 +74,11 @@ for (i = 0; i<items.length; i++){
             
         }
    })
-   let mouseMoveHandler = function(event) {
+   
+
+//  removes background when clicked again or alother is clicked 
+}
+let mouseMoveHandler = function(event) {
                 posX = event.clientX - image.width/2
                 posY = event.clientY - image.height/2
                 image.style.setProperty("z-index", zindex)
@@ -74,9 +87,10 @@ for (i = 0; i<items.length; i++){
             }
             document.addEventListener("mousemove", mouseMoveHandler)
 
-    let canvasClickHandler = function(event){
+    let canvasClickHandler = function(){
                 document.removeEventListener('mousemove', mouseMoveHandler);
                 currentBtn.classList.remove("clicked")
+                text.innerHTML = "To start decorating, click an item you want to add!"
                 let furniture = image.cloneNode()
                 stickers.push(furniture)
                 furnitures.appendChild(furniture)
@@ -93,10 +107,6 @@ for (i = 0; i<items.length; i++){
             }
 
             canvas.addEventListener("click", canvasClickHandler)
-
-//  removes background when clicked again or alother is clicked 
-
-}
 
 // let posButton = document.querySelector("#posButton")
 // posButton.addEventListener("click", function(){
@@ -132,4 +142,26 @@ clearButton.addEventListener("mouseup", function(){
         console.log(furnitures)
         furnitures.removeChild(furnitures.lastChild)
     }     
+})
+
+let flipButton = document.querySelector("#flipButton")
+flipButton.addEventListener("click", function(){
+    flipButton.classList.toggle("clicked")       
+    for (i = 0; i<items.length; i++){
+        items[i].classList.toggle("flipped")
+   }    
+})
+
+
+
+let undoButton = document.querySelector("#undoButton")
+undoButton.addEventListener("mousedown", function(){
+    undoButton.classList.add("clicked")             
+    })
+
+undoButton.addEventListener("mouseup", function(){
+    undoButton.classList.remove("clicked")  
+    if (furnitures.children.length > 0){
+        furnitures.removeChild(furnitures.lastChild)  
+    }
 })
