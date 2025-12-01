@@ -81,6 +81,7 @@ for (i = 0; i<items.length; i++){
         let key = event.key
         if (key == " "){
             this.click()
+            canvas.focus()
         }
     })
    
