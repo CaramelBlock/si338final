@@ -11,6 +11,8 @@ let text = document.querySelector("h2");
 
 // console.log(items)
 
+
+
 for (i = 0; i<items.length; i++){
 //   mouseover for creating border
    items[i].addEventListener("mouseover",function(){
@@ -23,7 +25,7 @@ for (i = 0; i<items.length; i++){
    })
 
 //   creates background #d94ca0 when clicked
-    items[i].addEventListener("click",function(event){
+    items[i].addEventListener("click", function(event){
         this.classList.toggle("clicked")
         if (this.classList.value.includes("clicked")){
             text.innerHTML = "Now click the location you want the object placed!"
@@ -73,7 +75,14 @@ for (i = 0; i<items.length; i++){
             console.log(clickedImages)
             
         }
-   })
+    })
+
+    items[i].addEventListener("keydown", function(event){
+        let key = event.key
+        if (key == " "){
+            this.click()
+        }
+    })
    
 
 //  removes background when clicked again or alother is clicked 
@@ -87,26 +96,65 @@ let mouseMoveHandler = function(event) {
             }
             document.addEventListener("mousemove", mouseMoveHandler)
 
-    let canvasClickHandler = function(){
-                document.removeEventListener('mousemove', mouseMoveHandler);
-                currentBtn.classList.remove("clicked")
-                text.innerHTML = "To start decorating, click an item you want to add!"
-                let furniture = image.cloneNode()
-                stickers.push(furniture)
-                furnitures.appendChild(furniture)
-                if (container.lastChild){
-                    container.removeChild(container.lastChild)
-                }
-                clickedImages.pop()
-                // for (i = 0; i<stickers.length; i++){
-                //    furnitures.removeChild(furnitures.lastChild) 
-                // }
-                document.addEventListener("mousemove", mouseMoveHandler)
-                canvas.classList.add("notClickable")
-                
-            }
+let keyMoveHandler = function(event) {
+    let key = event.key
+    let posXValue = image.style.getPropertyValue("left")
+    let posYValue = image.style.getPropertyValue("top")
+    posX = parseInt(posXValue.slice(0,posXValue.length - 2))
+    posY = parseInt(posYValue.slice(0,posYValue.length - 2))
+    if (key === "ArrowRight"){
+        console.log(posX)
+       posX += 10
+       console.log(posX)
+    }
+    if (key === "ArrowLeft"){
+       posX -= 10
+    }
+    if (key === "ArrowUp"){
+       posY -= 10
+    }
+    if (key === "ArrowDown"){
+        console.log(posY)
+       posY += 10
+       console.log(posY)
+    }
+    image.style.setProperty("z-index", zindex)
+    image.style.setProperty("top",posY+"px")
+    image.style.setProperty("left",posX+"px")
 
-            canvas.addEventListener("click", canvasClickHandler)
+}
+document.addEventListener("keydown", keyMoveHandler)
+
+let canvasClickHandler = function(){
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener("keydown", keyMoveHandler)
+            currentBtn.classList.remove("clicked")
+            text.innerHTML = "To start decorating, click an item you want to add!"
+            let furniture = image.cloneNode()
+            stickers.push(furniture)
+            furnitures.appendChild(furniture)
+            if (container.lastChild){
+                container.removeChild(container.lastChild)
+            }
+            clickedImages.pop()
+            // for (i = 0; i<stickers.length; i++){
+            //    furnitures.removeChild(furnitures.lastChild) 
+            // }
+            document.addEventListener("mousemove", mouseMoveHandler)
+            document.addEventListener("keydown", keyMoveHandler)
+            canvas.classList.add("notClickable")
+            
+        }
+
+        canvas.addEventListener("click", canvasClickHandler)
+
+canvas.addEventListener("keydown", function(event){
+        let key = event.key
+        console.log(key)
+        if (key == " "){
+            this.click()
+        }
+    })
 
 // let posButton = document.querySelector("#posButton")
 // posButton.addEventListener("click", function(){
@@ -132,20 +180,31 @@ let mouseMoveHandler = function(event) {
 // })
 
 let clearButton = document.querySelector("#clearButton")
-clearButton.addEventListener("mousedown", function(){
-    clearButton.classList.add("clicked")             
-    })
+// clearButton.addEventListener("mousedown", function(){
+//     clearButton.classList.add("clicked")             
+//     })
 
-clearButton.addEventListener("mouseup", function(){
-    let conformation = confirm("Are you sure you want to remove all of your furniture?")
-    clearButton.classList.remove("clicked") 
+// clearButton.addEventListener("mouseup", function(){
+//     let conformation = confirm("Are you sure you want to remove all of your furniture?")
+//     clearButton.classList.remove("clicked") 
+//     if (conformation){      
+//         while (furnitures.children.length > 0){
+//             console.log(furnitures)
+//             furnitures.removeChild(furnitures.lastChild)
+//         }
+//     }     
+// })
+clearButton.addEventListener("click", function(){
+    let conformation = confirm("Are you sure you want to remove all of your furniture?") 
     if (conformation){      
         while (furnitures.children.length > 0){
             console.log(furnitures)
             furnitures.removeChild(furnitures.lastChild)
         }
-    }     
+    }
 })
+
+
 
 let flipButton = document.querySelector("#flipButton")
 flipButton.addEventListener("click", function(){
@@ -155,15 +214,19 @@ flipButton.addEventListener("click", function(){
    }    
 })
 
-
-
 let undoButton = document.querySelector("#undoButton")
-undoButton.addEventListener("mousedown", function(){
-    undoButton.classList.add("clicked")             
-    })
+// undoButton.addEventListener("mousedown", function(){
+//     undoButton.classList.add("clicked")             
+//     })
 
-undoButton.addEventListener("mouseup", function(){
-    undoButton.classList.remove("clicked")  
+// undoButton.addEventListener("mouseup", function(){
+//     undoButton.classList.remove("clicked")  
+//     if (furnitures.children.length > 0){
+//         furnitures.removeChild(furnitures.lastChild)  
+//     }
+// })
+
+undoButton.addEventListener("click", function(){
     if (furnitures.children.length > 0){
         furnitures.removeChild(furnitures.lastChild)  
     }
